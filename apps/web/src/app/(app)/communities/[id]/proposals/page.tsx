@@ -25,7 +25,7 @@ const ALL_STATES = "all";
 
 function ScopedProposalHistory({ community }: { community: CommunityView }) {
   const governorContract = community.record.governorContract;
-  const { proposals: discovered, loading, error, empty, refresh } =
+  const { proposals: discovered, loading, error, empty, refresh, latestLedger } =
     useProposalDiscovery(governorContract);
   const proposals = useMemo(
     () =>
@@ -211,7 +211,10 @@ function ScopedProposalHistory({ community }: { community: CommunityView }) {
                     summary={{
                       proposalId: proposal.id,
                       description: proposal.description,
+                      voteEnd: proposal.voteEnd,
+                      voteSnapshot: proposal.voteSnapshot,
                     }}
+                    currentLedger={latestLedger}
                     showDescription
                     href={`/communities/${community.record.id}/proposals/${proposal.id}`}
                     stateStatus={
