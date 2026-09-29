@@ -32,7 +32,7 @@ test("navigates landing, Community, and Proposals without mobile overflow", asyn
   ).toBeVisible();
   const appNavigation = page.getByRole("navigation");
   await expect(
-    appNavigation.getByRole("link", { name: "Community" }),
+    appNavigation.getByRole("link", { name: "Legacy collection" }),
   ).toBeVisible();
   await expect(
     appNavigation.getByRole("link", { name: "Proposals" }),
@@ -47,7 +47,7 @@ test("navigates landing, Community, and Proposals without mobile overflow", asyn
   ).toBeVisible();
   await expectNoHorizontalOverflow(page);
 
-  await appNavigation.getByRole("link", { name: "Community" }).click();
+  await appNavigation.getByRole("link", { name: "Legacy collection" }).click();
   await expect(page).toHaveURL("/community");
   await expect(
     page.getByRole("heading", { level: 1, name: "Community NFT" }),

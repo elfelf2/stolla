@@ -105,14 +105,20 @@ export function CommunitySwitcher({
       <div className="relative shrink-0">
         <Link
           href="/communities"
-          className="flex min-h-10 max-w-56 items-center gap-2 rounded-lg border border-amber-800/70 bg-amber-950/40 px-3 py-2 text-left text-sm text-amber-100 hover:bg-amber-950/60"
+          className="flex min-h-10 items-center gap-2 whitespace-nowrap rounded-lg border border-amber-800/70 bg-amber-950/40 px-3 py-2 text-left text-sm text-amber-100 hover:bg-amber-950/60"
           aria-label="Community registry unavailable. Open communities for configuration details."
         >
-          <span className="truncate">Registry unavailable</span>
+          Registry unavailable
         </Link>
       </div>
     );
   }
+
+  const accessibleName = selected
+    ? `Active community ${selectedLabel}`
+    : selectedId
+      ? `Community ${selectedLabel}`
+      : "Choose community";
 
   return (
     <div className="relative shrink-0">
@@ -122,9 +128,18 @@ export function CommunitySwitcher({
         onClick={() => setOpen((current) => !current)}
         aria-expanded={open}
         aria-haspopup="dialog"
-        className="flex min-h-10 max-w-48 items-center gap-2 rounded-lg border border-slate-700 bg-slate-900/70 px-3 py-2 text-left text-sm text-slate-200 hover:bg-slate-800"
+        aria-label={accessibleName}
+        className="flex min-h-10 items-center gap-2 whitespace-nowrap rounded-lg border border-slate-700 bg-slate-900/70 px-3 py-2 text-left text-sm text-slate-200 hover:bg-slate-800"
       >
-        <span className="truncate">{selectedLabel}</span>
+        <span
+          className={
+            selected || !selectedId
+              ? "whitespace-nowrap"
+              : "max-w-[10rem] truncate sm:max-w-[14rem]"
+          }
+        >
+          {selectedLabel}
+        </span>
         <span aria-hidden="true" className="text-xs text-slate-500">
           ▾
         </span>
